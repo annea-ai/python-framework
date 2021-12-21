@@ -1,0 +1,4 @@
+Bar
+===
+
+An example lib

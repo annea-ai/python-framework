@@ -24,10 +24,14 @@ jobs:
             (cd libs/annea_bar; python setup.py bdist_wheel; twine upload dist/*)
             (cd libs/annea_foo; python setup.py bdist_wheel; twine upload dist/*)
 workflows:
-  build:
+  build-test-and-approval-deploy:
     jobs:
       - build-and-test
-      - pypi-publish:
+      - hold:
+          type: approval
           requires:
             - build-and-test
+      - pypi-publish:
+          requires:
+            - hold
 

@@ -1,5 +1,7 @@
 Python Framework
 ================
+[![annea-ai](https://circleci.com/gh/annea-ai/python-framework.svg?style=svg)](https://app.circleci.com/pipelines/github/annea-ai/python-framework)
+
 An implementation of a Python Framework
 
 # Apps

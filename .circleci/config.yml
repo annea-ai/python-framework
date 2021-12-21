@@ -27,6 +27,9 @@ workflows:
   build:
     jobs:
       - build-and-test
+  build-test-and-approval-deploy:
+    jobs:
+      - build-and-test
       - pypi-publish:
           requires:
             - build-and-test

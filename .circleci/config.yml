@@ -13,8 +13,21 @@ jobs:
             (cd libs/annea_foo; tox)
             (cd libs/annea_bar; tox)
             (cd apps/baz; tox)
+  pypi-publish:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - run:
+          command: |
+            pip install twine
+            (cd libs/annea_bar; python setup.py bdist_wheel; twine upload dist/*)
+            (cd libs/annea_foo; python setup.py bdist_wheel; twine upload dist/*)
 workflows:
   build:
     jobs:
       - build-and-test
+      - pypi-publish:
+          requires:
+            - build-and-test
 

@@ -31,8 +31,9 @@ jobs:
           path: ~/python-framework
       - run: docker login --username $DOCKER_USER --password $DOCKER_PASS
       - run: docker build -t anneaai/baz:$CIRCLE_BUILD_NUM .
-      - run: docker tag anneaai/baz:$CIRCLE_BUILD_NUM anneaai/baz:latest
       - run: docker push anneaai/baz:$CIRCLE_BUILD_NUM
+      - run: docker tag anneaai/baz:$CIRCLE_BUILD_NUM anneaai/baz:latest
+      - run: docker push anneaai/baz:latest
 workflows:
   build-test-and-approval-deploy:
     jobs:

@@ -43,7 +43,7 @@ workflows:
             branches:
               only: master
             tags:
-              only: pypi
+              only: /^v.*/
           requires:
             - build-and-test
       - build-and-push-docker:
@@ -51,6 +51,6 @@ workflows:
             branches:
               only: master
             tags:
-              only: docker
+              only: /^v.*/
           requires:
             - build-and-test

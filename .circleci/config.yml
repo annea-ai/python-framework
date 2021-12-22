@@ -23,6 +23,15 @@ jobs:
             pip install twine
             (cd libs/annea_bar; python setup.py bdist_wheel; twine upload dist/*)
             (cd libs/annea_foo; python setup.py bdist_wheel; twine upload dist/*)
+  build-and-push-docker:
+    machine: true
+    steps:
+      - checkout
+      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run: cd apps/baz
+      - run: docker build -t anneaai/baz:$CIRCLE_BUILD_NUMBER .
+      - run: docker tag anneaai/baz:$BITBUCKET_BUILD_NUMBER anneaai/baz:latest
+      - run: docker push anneaai/baz:$BITBUCKET_BUILD_NUMBER
 workflows:
   build-test-and-approval-deploy:
     jobs:
@@ -34,4 +43,6 @@ workflows:
       - pypi-publish:
           requires:
             - hold
-
+      - build-and-push-docker:
+          requires:
+            - hold

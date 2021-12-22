@@ -25,10 +25,11 @@ jobs:
             (cd libs/annea_foo; python setup.py bdist_wheel; twine upload dist/*)
   build-and-push-docker:
     machine: true
+    working_directory: ~/python-framework/apps/baz
     steps:
-      - checkout
+      - checkout:
+          path: ~/python-framework
       - run: docker login --username $DOCKER_USER --password $DOCKER_PASS
-      - run: cd apps/baz
       - run: docker build -t anneaai/baz:$CIRCLE_BUILD_NUM .
       - run: docker tag anneaai/baz:$BITBUCKET_BUILD_NUM anneaai/baz:latest
       - run: docker push anneaai/baz:$BITBUCKET_BUILD_NUM

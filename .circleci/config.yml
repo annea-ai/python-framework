@@ -29,9 +29,9 @@ jobs:
       - checkout
       - run: docker login --username $DOCKER_USER --password $DOCKER_PASS
       - run: cd apps/baz
-      - run: docker build -t anneaai/baz:$CIRCLE_BUILD_NUMBER .
-      - run: docker tag anneaai/baz:$BITBUCKET_BUILD_NUMBER anneaai/baz:latest
-      - run: docker push anneaai/baz:$BITBUCKET_BUILD_NUMBER
+      - run: docker build -t anneaai/baz:$CIRCLE_BUILD_NUM .
+      - run: docker tag anneaai/baz:$BITBUCKET_BUILD_NUM anneaai/baz:latest
+      - run: docker push anneaai/baz:$BITBUCKET_BUILD_NUM
 workflows:
   build-test-and-approval-deploy:
     jobs:

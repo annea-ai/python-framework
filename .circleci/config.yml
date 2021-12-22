@@ -36,13 +36,17 @@ workflows:
   build-test-and-approval-deploy:
     jobs:
       - build-and-test
-      - hold:
+      - hold1:
           type: approval
           requires:
             - build-and-test
       - pypi-publish:
           requires:
-            - hold
+            - hold1
+      - hold2:
+          type: approval
+          requires:
+            - build-and-test
       - build-and-push-docker:
           requires:
-            - hold
+            - hold2

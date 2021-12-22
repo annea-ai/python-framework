@@ -15,7 +15,7 @@ setup(
     license="MIT",
     packages=['src'],
     install_requires=[
-        'annea_bar',
+        'annea_bar==0.1.0',
         # add more packages if needed
     ],
     url="https://github.com/annea-ai/python-framework/tree/master/libs/annea_foo"

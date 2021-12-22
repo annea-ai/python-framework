@@ -40,17 +40,13 @@ workflows:
       - build-and-test
       - pypi-publish:
           filters:
-            branches:
-              only: master
             tags:
-              only: /^v.*/
+              only: pypi
           requires:
             - build-and-test
       - build-and-push-docker:
           filters:
-            branches:
-              only: master
             tags:
-              only: /^v.*/
+              only: docker
           requires:
             - build-and-test

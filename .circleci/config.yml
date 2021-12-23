@@ -35,27 +35,12 @@ jobs:
       - run: docker tag anneaai/baz:$CIRCLE_BUILD_NUM anneaai/baz:latest
       - run: docker push anneaai/baz:latest
 workflows:
-  build_and_test:
+  build-and-release:
     jobs:
-      - build-and-test:
-        filters:
-          tags:
-            ignore: /^v.*/
-  build_and_release:
-    jobs:
-      - build-and-test:
-        filters:
-          tags:
-            only: /.*/
+      - build-and-test
       - pypi-publish:
-          filters:
-            tags:
-              only: pypi
           requires:
             - build-and-test
       - build-and-push-docker:
-          filters:
-            tags:
-              only: docker
           requires:
             - build-and-test

@@ -1,3 +1,5 @@
+import os
+
 from setuptools import setup
 from pathlib import Path
 
@@ -6,7 +8,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='annea_foo',
-    version="0.1.2",
+    version=f"0.1.{os.getenv('CIRCLE_BUILD_NUM')}",
     description="An example python package",
     long_description=long_description,
     long_description_content_type="text/markdown",

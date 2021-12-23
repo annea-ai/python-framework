@@ -45,22 +45,16 @@ workflows:
     jobs:
       - build-and-test:
         filters:
-          branches:
-              only: master
           tags:
             only: /.*/
       - pypi-publish:
           filters:
-            branches:
-              only: master
             tags:
               only: pypi
           requires:
             - build-and-test
       - build-and-push-docker:
           filters:
-            branches:
-              only: master
             tags:
               only: docker
           requires:

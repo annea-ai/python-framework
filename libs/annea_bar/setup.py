@@ -20,7 +20,7 @@ setup(
     author="horken7",
     author_email="Johan Larsson Hörkén <johan.horken@annea.ai>",
     license="MIT",
-    packages=['src'],
+    packages=['annea_bar'],
     install_requires=[],
     url="https://github.com/annea-ai/python-framework/tree/master/libs/annea_bar"
 )

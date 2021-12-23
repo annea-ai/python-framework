@@ -20,7 +20,7 @@ setup(
     author="horken7",
     author_email="Johan Larsson Hörkén <johan.horken@annea.ai>",
     license="MIT",
-    packages=['src'],
+    packages=['annea_foo'],
     install_requires=[
         'annea_bar==0.1.0',
         # add more packages if needed

@@ -1,6 +1,6 @@
 import os
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from pathlib import Path
 
 this_directory = Path(__file__).parent
@@ -20,7 +20,8 @@ setup(
     author="horken7",
     author_email="Johan Larsson Hörkén <johan.horken@annea.ai>",
     license="MIT",
-    packages=['annea_bar'],
+    package_dir={'': 'src'},
+    packages=find_packages(where='src'),
     install_requires=[],
     url="https://github.com/annea-ai/python-framework/tree/master/libs/annea_bar"
 )

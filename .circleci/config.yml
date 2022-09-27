@@ -1,9 +1,9 @@
 version: 2.1
 
 jobs:
-  build-and-test:
+  test:
     docker:
-      - image: cimg/python:3.8
+      - image: cimg/python:3.10
     steps:
       - checkout
       - run:
@@ -12,36 +12,23 @@ jobs:
             pip install tox
             (cd libs/annea_foo; tox)
             (cd libs/annea_bar; tox)
-            (cd apps/baz; tox)
-  pypi-publish:
-    docker:
-      - image: cimg/python:3.8
-    steps:
-      - checkout
-      - run:
-          command: |
-            pip install twine
-            (cd libs/annea_bar; python setup.py bdist_wheel; twine upload dist/*)
-            (cd libs/annea_foo; python setup.py bdist_wheel; twine upload dist/*)
+            (cd apps/annea_baz; tox)
   build-and-push-docker:
     machine:
       image: ubuntu-2004:202010-01
-    working_directory: ~/python-framework/apps/baz
+    working_directory: ~/python-framework
     steps:
       - checkout:
           path: ~/python-framework
       - run: docker login --username $DOCKER_USER --password $DOCKER_PASS
-      - run: docker build -t anneaai/baz:$CIRCLE_BUILD_NUM .
+      - run: docker build -t anneaai/baz:$CIRCLE_BUILD_NUM -f apps/annea_baz/Dockerfile .
       - run: docker push anneaai/baz:$CIRCLE_BUILD_NUM
       - run: docker tag anneaai/baz:$CIRCLE_BUILD_NUM anneaai/baz:latest
       - run: docker push anneaai/baz:latest
 workflows:
   build-and-release:
     jobs:
-      - build-and-test
-      - pypi-publish:
-          requires:
-            - build-and-test
+      - test
       - build-and-push-docker:
           requires:
-            - build-and-test
+            - test

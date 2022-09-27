@@ -1,12 +1,11 @@
 version: '3.5'
 
 services:
-  baz:
-    image: baz
+  annea_baz:
+    image: annea_baz
     build:
-      context: apps/baz
-      dockerfile: Dockerfile
-      network: host
-    container_name: baz
+      context: .
+      dockerfile: apps/annea_baz/Dockerfile
+    container_name: annea_baz
     volumes:
-      - "./apps/baz:/app"
+      - "./apps/annea_baz:/apps/annea_baz"

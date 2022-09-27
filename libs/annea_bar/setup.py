@@ -1,10 +1,10 @@
 import os
+import pathlib
 
 from setuptools import setup, find_packages
-from pathlib import Path
 
-this_directory = Path(__file__).parent
-long_description = (this_directory / "README.md").read_text()
+here = pathlib.Path(__file__).parent.resolve()
+long_description = (here / "README.md").read_text()
 
 if 'CIRCLE_BUILD_NUM' in os.environ:
     version = f"0.1.{os.getenv('CIRCLE_BUILD_NUM')}"

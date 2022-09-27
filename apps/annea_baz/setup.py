@@ -24,9 +24,9 @@ def lib_path(lib_name):
 
 
 setup(
-    name='annea_foo',
+    name='annea_baz',
     version=version,
-    description="An example python package",
+    description="An example python app",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="horken7",
@@ -35,8 +35,14 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     install_requires=[
+        lib_path('annea_foo'),
         lib_path('annea_bar'),
         # add more packages if needed
     ],
+    entry_points={
+        "console_scripts": [
+            'annea_baz = annea_baz.main:main'
+        ]
+    },
     url="https://github.com/annea-ai/python-framework/tree/master/libs/annea_foo"
 )
